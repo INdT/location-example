@@ -13,5 +13,6 @@ Item {
 
     MainMap {
         id: mainMap
+        Component.onCompleted: manager.init()
     }
 }
