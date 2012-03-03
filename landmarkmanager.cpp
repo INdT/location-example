@@ -2,6 +2,7 @@
 
 #include <qlandmarkmanager.h>
 #include <qlandmark.h>
+#include <qgeocoordinate.h>
 #include <QObject>
 #include <QString>
 #include <QStringList>
@@ -29,11 +30,20 @@ void LandmarkManager::init()
     }
 }
 
-void LandmarkManager::saveLandmark(QLandmark *landmark)
+void LandmarkManager::saveLandmark(double latitude, double longitude, QString name)
 {
     if (!m_manager)
         return;
-    Q_UNUSED(landmark);
+
+    QGeoCoordinate coordinate;
+    coordinate.setLatitude(latitude);
+    coordinate.setLongitude(longitude);
+    QLandmark *landmark = new QLandmark;
+    landmark->setName(name);
+    landmark->setCoordinate(coordinate);
+
+    bool result = m_manager->saveLandmark(landmark);
+    qDebug() << __func__ << "#### result of save landmark: " << result;
 }
 
 void LandmarkManager::landmarks()

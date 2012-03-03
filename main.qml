@@ -22,6 +22,8 @@ Item {
         onAddLandmark: {
            popupDialog.x = mouseObject.x
            popupDialog.y = mouseObject.y
+           popupDialog.latitude = mouseObject.coordinate.latitude
+           popupDialog.longitude = mouseObject.coordinate.longitude
            popupDialog.visible = !popupDialog.visible
         }
     }
@@ -29,5 +31,11 @@ Item {
     PopupDialog {
         id: popupDialog
         visible: false
+
+        onPopupOk: {
+            controller.saveLandmark(popupDialog.latitude, popupDialog.longitude, text)
+            popupDialog.visible = !popupDialog.visible
+            popupDialog.inputText = ""
+        }
     }
 }
