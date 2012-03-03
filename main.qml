@@ -13,6 +13,21 @@ Item {
 
     MainMap {
         id: mainMap
-        Component.onCompleted: manager.init()
+        Component.onCompleted: {
+            controller.init()
+            controller.cleanLandmarks()
+            controller.landmarks()
+        }
+
+        onAddLandmark: {
+           popupDialog.x = mouseObject.x
+           popupDialog.y = mouseObject.y
+           popupDialog.visible = !popupDialog.visible
+        }
+    }
+
+    PopupDialog {
+        id: popupDialog
+        visible: false
     }
 }

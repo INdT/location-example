@@ -5,6 +5,8 @@ Item {
     width: parent.width
     height: parent.height
 
+    signal addLandmark(variant mouseObject)
+
     Coordinate {
         id: initialCoordinate
         latitude: -3.0607
@@ -16,9 +18,6 @@ Item {
         autoUpdate: true
         sortBy: LandmarkModel.NameSort
         sortOrder: LandmarkModel.AscendingOrder
-        limit: 100
-        importFile: "mylandmarks.lmx"
-        onModelChanged: console.log("count: "+count)
     }
 
     Map {
@@ -48,6 +47,11 @@ Item {
             property int lastX: -1
             property int lastY: -1
 
+            onClicked: {
+                if (mouse.button == Qt.RightButton) {
+                    addLandmark(mouse)
+                }
+            }
             onPressed: {
                 lastX = mouse.x
                 lastY = mouse.y
@@ -78,8 +82,9 @@ Item {
                     map.zoomLevel -= 1
             }
         }
+
         Behavior on zoomLevel {
-            NumberAnimation { duration: 500; easing.type: Easing.OutQuad }
+            PropertyAnimation { duration: 500; easing.type: Easing.OutQuad }
         }
     }
 }
