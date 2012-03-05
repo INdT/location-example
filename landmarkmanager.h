@@ -14,8 +14,11 @@ public:
     LandmarkManager(QObject *parent = 0);
     ~LandmarkManager();
 
+public slots:
     void init();
-    void saveLandmark(QLandmark *landmark);
+    void saveLandmark(double latitude, double longitude, QString name);
+    void landmarks();
+    bool cleanLandmarks();
 
 private:
     QLandmarkManager *m_manager;
