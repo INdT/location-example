@@ -6,12 +6,18 @@ Item {
     height: 100
     width: 200
 
+    property real latitude: 0.0
+    property real longitude: 0.0
+    property alias inputText: inputName.text
+
     signal popupOk(string text)
 
     Rectangle {
         id: background
         anchors.fill: parent
         color: "white"
+        border.width: 2
+        border.color: "black"
     }
 
     Text {
