@@ -13,6 +13,29 @@ Item {
 
     MainMap {
         id: mainMap
-        Component.onCompleted: manager.init()
+
+        onAddLandmark: {
+           popupDialog.x = mouseObject.x
+           popupDialog.y = mouseObject.y
+           popupDialog.latitude = mouseObject.coordinate.latitude
+           popupDialog.longitude = mouseObject.coordinate.longitude
+           popupDialog.visible = !popupDialog.visible
+        }
+
+        Component.onCompleted: {
+            controller.init()
+            controller.landmarks()
+        }
+    }
+
+    PopupDialog {
+        id: popupDialog
+        visible: false
+
+        onPopupOk: {
+            controller.saveLandmark(popupDialog.latitude, popupDialog.longitude, text)
+            popupDialog.visible = !popupDialog.visible
+            popupDialog.inputText = ""
+        }
     }
 }
