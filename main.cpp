@@ -9,13 +9,15 @@
 int main (int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    LandmarkManager manager;
+    LandmarkManager *manager = new LandmarkManager;;
 
     QDeclarativeView view;
+
+    view.rootContext()->setContextProperty("controller", manager);
     view.setSource(QUrl("main.qml"));
     view.resize(480, 854);
+    view.setResizeMode(QDeclarativeView::SizeRootObjectToView);
 
-    view.engine()->rootContext()->setContextProperty("manager", &manager);
 
     view.show();
 
