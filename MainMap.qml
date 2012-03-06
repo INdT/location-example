@@ -69,10 +69,12 @@ Item {
                 mapContainer.clicked(mouse)
             }
             onPressed: {
+                allLandmarksModel.autoUpdate = false
                 lastX = mouse.x
                 lastY = mouse.y
             }
             onReleased: {
+                allLandmarksModel.autoUpdate = true
                 lastX = -1
                 lastY = -1
             }
