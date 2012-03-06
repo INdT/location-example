@@ -14,7 +14,7 @@ int main (int argc, char *argv[])
     QDeclarativeView view;
 
     view.rootContext()->setContextProperty("controller", manager);
-    view.setSource(QUrl("main.qml"));
+    view.setSource(QUrl("qrc:/main.qml"));
     view.resize(480, 854);
     view.setResizeMode(QDeclarativeView::SizeRootObjectToView);
 

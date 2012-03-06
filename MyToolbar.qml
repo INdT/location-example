@@ -9,12 +9,12 @@ Item {
 
     MyButton {
         id: button
-        defaultImage: "btn_add.png"
-        pressedImage: "btn_add.png"
-        disabledImage: "btn_add.png"
+        defaultImage: "qrc:/btn_add.png"
+        pressedImage: "qrc:/btn_add.png"
+        disabledImage: "qrc:/btn_add.png"
 
         anchors.right: parent.right
-        anchors.verticalAlignment: parent.verticalCenter
+        anchors.verticalCenter: parent.verticalCenter
 
         onClicked: toolbar.clicked()
     }

@@ -43,9 +43,9 @@ Item {
         MyButton {
             id: okButton
             state: "enabled"
-            defaultImage: "bt_ok_on.png"
-            pressedImage: "bt_ok_off.png"
-            disabledImage: "bt_ok_disabled.png"
+            defaultImage: "qrc:/bt_ok_on.png"
+            pressedImage: "qrc:/bt_ok_off.png"
+            disabledImage: "qrc:/bt_ok_disabled.png"
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
 

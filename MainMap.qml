@@ -52,7 +52,7 @@ Item {
                     }
                     MapImage {
                         id: image
-                        source: "landmarkstar.png"
+                        source: "qrc:/landmarkstar.png"
                         coordinate: landmark.coordinate
                     }
                 }
