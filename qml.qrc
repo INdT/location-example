@@ -11,5 +11,7 @@
         <file>bt_ok_off.png</file>
         <file>bt_ok_on.png</file>
         <file>landmarkstar.png</file>
+        <file>btn_plus.png</file>
+        <file>btn_minus.png</file>
     </qresource>
 </RCC>
