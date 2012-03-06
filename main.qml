@@ -15,11 +15,11 @@ Item {
         id: mainMap
 
         onAddLandmark: {
-           popupDialog.x = mouseObject.x
-           popupDialog.y = mouseObject.y
-           popupDialog.latitude = mouseObject.coordinate.latitude
-           popupDialog.longitude = mouseObject.coordinate.longitude
-           popupDialog.visible = !popupDialog.visible
+            popupDialog.x = mouseObject.x
+            popupDialog.y = mouseObject.y
+            popupDialog.latitude = mouseObject.coordinate.latitude
+            popupDialog.longitude = mouseObject.coordinate.longitude
+            popupDialog.visible = !popupDialog.visible
         }
 
         Component.onCompleted: {
