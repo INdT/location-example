@@ -14,12 +14,16 @@ Item {
     MainMap {
         id: mainMap
 
-        onAddLandmark: {
-            popupDialog.x = mouseObject.x
-            popupDialog.y = mouseObject.y
-            popupDialog.latitude = mouseObject.coordinate.latitude
-            popupDialog.longitude = mouseObject.coordinate.longitude
-            popupDialog.visible = !popupDialog.visible
+        onClicked: {
+            if (mouse.button == Qt.LeftButton || mouse.button == Qt.RightButton && popupDialog.visible) {
+                popupDialog.visible = false
+            } else if (mouse.button == Qt.MiddleButton) {
+                popupDialog.x = mouse.x
+                popupDialog.y = mouse.y
+                popupDialog.latitude = mouse.coordinate.latitude
+                popupDialog.longitude = mouse.coordinate.longitude
+                popupDialog.visible = !popupDialog.visible
+            }
         }
 
         Component.onCompleted: {

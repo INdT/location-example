@@ -2,10 +2,12 @@ import QtQuick 1.0
 import QtMobility.location 1.2
 
 Item {
+    id: mapContainer
+
     width: parent.width
     height: parent.height
 
-    signal addLandmark(variant mouseObject)
+    signal clicked(variant mouse)
 
     Coordinate {
         id: initialCoordinate
@@ -58,13 +60,13 @@ Item {
         }
 
         MapMouseArea {
+            id: mapMouseArea
+
             property int lastX: -1
             property int lastY: -1
 
             onClicked: {
-                if (mouse.button == Qt.MiddleButton) {
-                    addLandmark(mouse)
-                }
+                mapContainer.clicked(mouse)
             }
             onPressed: {
                 lastX = mouse.x
@@ -96,6 +98,7 @@ Item {
                     map.zoomLevel -= 1
             }
         }
+
         Behavior on zoomLevel {
             NumberAnimation { duration: 500; easing.type: Easing.OutQuad }
         }
