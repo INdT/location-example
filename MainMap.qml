@@ -24,7 +24,7 @@ Item {
     Map {
         id: map
         plugin: Plugin { name: "nokia" }
-        zoomLevel: 5
+        zoomLevel: 10
         center: initialCoordinate
 
         anchors.fill: parent
@@ -36,10 +36,23 @@ Item {
             model: allLandmarksModel
             delegate: Component {
                 id: landDelegate
-                MapImage {
-                    id: image
-                    source: "landmarkstar.png"
-                    coordinate: landmark.coordinate
+                MapGroup {
+                    id: groupDelegate
+                    MapText {
+                        id: text
+                        text: landmark.name
+                        font.pixelSize: 12
+                        font.bold: true
+                        font.capitalization: Font.Capitalize
+                        color: "#616161"
+                        coordinate: landmark.coordinate
+                        offset.y: -10
+                    }
+                    MapImage {
+                        id: image
+                        source: "landmarkstar.png"
+                        coordinate: landmark.coordinate
+                    }
                 }
             }
         }
@@ -49,7 +62,7 @@ Item {
             property int lastY: -1
 
             onClicked: {
-                if (mouse.button == Qt.RightButton) {
+                if (mouse.button == Qt.MiddleButton) {
                     addLandmark(mouse)
                 }
             }
@@ -83,7 +96,6 @@ Item {
                     map.zoomLevel -= 1
             }
         }
-
         Behavior on zoomLevel {
             NumberAnimation { duration: 500; easing.type: Easing.OutQuad }
         }
