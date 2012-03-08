@@ -1,43 +1,18 @@
 import QtQuick 1.0
 import QtMobility.location 1.2
+import Qt.labs.components.native 1.0
 
-Item {
+Window {
     id: main
-    width: 480
-    height: 854
-
-    PositionSource {
-        id: positionSource
-        updateInterval: 1000
-        active: true
-    }
+    clip: true
 
     MainMap {
         id: mainMap
 
-        onClicked: {
-            if (mouse.button == Qt.LeftButton || mouse.button == Qt.RightButton && popupDialog.visible) {
-                popupDialog.visible = false
-                popupDialog.inputText = ""
-            } else if (mouse.button == Qt.MiddleButton) {
-                popupDialog.x = mouse.x
-                popupDialog.y = mouse.y
-                popupDialog.latitude = mouse.coordinate.latitude
-                popupDialog.longitude = mouse.coordinate.longitude
-                popupDialog.visible = !popupDialog.visible
-            }
-        }
-
-        MapCircle {
-            id: currentPosition
-            radius: 500
-            color: "red"
-            center: positionSource.position.coordinate
-        }
-
         Component.onCompleted: {
             controller.init()
             controller.landmarks()
+            currentLocationCircle = positionSource.position.coordinate
         }
     }
 
@@ -46,6 +21,7 @@ Item {
         visible: false
 
         onPopupOk: {
+            console.log("### saving landmark...")
             controller.saveLandmark(popupDialog.latitude, popupDialog.longitude, text)
             popupDialog.visible = !popupDialog.visible
             popupDialog.inputText = ""
@@ -54,13 +30,26 @@ Item {
 
     MyToolbar {
         id: myToolbar
+        visible: true
+        anchors.bottom: mainMap.bottom
 
-        anchors.bottom: parent.bottom
-        onClicked: {
-            popupDialog.center = mainMap.toScreenPostion(positionSource.position.coordinate)
-            popupDialog.latitude = positionSource.position.coordinate.latitude
-            popupDialog.longitude = positionSource.position.coordinate.longitude
+        onAddPosition: {
+            popupDialog.latitude = mainMap.positionSource.position.coordinate.latitude
+            popupDialog.longitude = mainMap.positionSource.position.coordinate.longitude
             popupDialog.visible = !popupDialog.visible
+            console.log("### adding position latitude: "+popupDialog.latitude + " -- longitude: "+popupDialog.longitude)
         }
+        onZoomIn: {
+            mainMap.mapObject.zoomLevel += 1
+            console.log("### zoomIn")
+        }
+        onZoomOut: {
+            mainMap.mapObject.zoomLevel -= 1
+            console.log("### zoomOut")
+        }
+    }
+
+    Page {
+        orientationLock: PageOrientation.LockPortrait
     }
 }
