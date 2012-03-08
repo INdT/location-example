@@ -13,7 +13,8 @@ SOURCES += landmarkmanager.cpp \
 
 RESOURCES += qml.qrc
 
-contains(MEEGO_EDITION,harmattan) {
+contains(MEEGO_EDITION, harmattan) {
+    DEFINES += MEEGO_EDITION_HARMATTAN
     target.path = /opt/location-example/bin
     INSTALLS += target
 }

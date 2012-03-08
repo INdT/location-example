@@ -13,13 +13,16 @@ int main (int argc, char *argv[])
 
     QDeclarativeView view;
 
+    view.setResizeMode(QDeclarativeView::SizeRootObjectToView);
     view.rootContext()->setContextProperty("controller", manager);
     view.setSource(QUrl("qrc:/main.qml"));
     view.resize(480, 854);
-    view.setResizeMode(QDeclarativeView::SizeRootObjectToView);
 
-
+#if defined(MEEGO_EDITION_HARMATTAN)
+    view.showFullScreen();
+#else
     view.show();
+#endif
 
     return app.exec();
 }
