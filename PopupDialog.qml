@@ -1,10 +1,11 @@
 import QtQuick 1.0
-import Qt.labs.components.native 1.0
+//import Qt.labs.components.native 1.0
+import com.nokia.meego 1.1
 
 Item {
     id: popupContainer
-    height: 100
-    width: 200
+    height: 200
+    width: 300
 
     property real latitude: 0.0
     property real longitude: 0.0
@@ -29,16 +30,24 @@ Item {
         anchors.left: parent.left
         anchors.leftMargin: 10
         anchors.top: parent.top
-        anchors.topMargin: 10
+        anchors.topMargin: 30
     }
 
     TextField {
         id: inputName
         width: parent.width
-        font.pixelSize: 12
+        errorHighlight: false
+        platformSipAttributes: SipAttributes { actionKeyHighlighted: true }
+        font.pixelSize: 20
         anchors.left: parent.left
         anchors.top: dscText.bottom
-        anchors.topMargin: 20
+        anchors.topMargin: 40
+
+        Keys.onReturnPressed: {
+            parent.focus = true
+            popupContainer.popupOk(inputName.text)
+            inputName.text = ""
+        }
 
         MyButton {
             id: okButton
@@ -50,7 +59,10 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
 
             onClicked: {
+                dscText.focus = true
+                inputName.focus = false
                 popupContainer.popupOk(inputName.text)
+                inputName.text = ""
             }
         }
     }
