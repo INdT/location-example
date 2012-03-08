@@ -20,6 +20,7 @@ Item {
     LandmarkModel {
         id: allLandmarksModel
         autoUpdate: true
+        importFile: "/opt/location-example/mylandmarks.lmx"
         sortBy: LandmarkModel.NameSort
         sortOrder: LandmarkModel.AscendingOrder
         limit: 100
