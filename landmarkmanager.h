@@ -4,6 +4,8 @@
 #include <QObject>
 #include <qlandmark.h>
 #include <qlandmarkmanager.h>
+#include <qlandmarkid.h>
+#include <qlandmarkcategoryid.h>
 
 QTM_USE_NAMESPACE
 
@@ -19,9 +21,11 @@ public slots:
     void saveLandmark(double latitude, double longitude, QString name);
     void landmarks();
     bool cleanLandmarks();
+    void onLandmarksAdded(const QList<QLandmarkId> &landmarkIds);
 
 private:
     QLandmarkManager *m_manager;
+    QLandmarkCategoryId m_categoryId;
 };
 
 #endif

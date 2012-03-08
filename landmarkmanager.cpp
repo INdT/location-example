@@ -2,7 +2,9 @@
 
 #include <qlandmarkmanager.h>
 #include <qlandmark.h>
+#include <qlandmarkid.h>
 #include <qgeocoordinate.h>
+#include <qlandmarkcategory.h>
 #include <QObject>
 #include <QString>
 #include <QStringList>
@@ -24,6 +26,15 @@ LandmarkManager::~LandmarkManager()
 void LandmarkManager::init()
 {
     m_manager = new QLandmarkManager;
+    connect(m_manager, SIGNAL(landmarksAdded(const QList<QLandmarkId> &)), this,
+            SLOT(onLandmarksAdded(const QList<QLandmarkId> &)));
+
+    QList<QLandmarkCategory> categories = m_manager->categories();
+    foreach(QLandmarkCategory category, categories) {
+        if (category.name() == "Geographical area")
+            m_categoryId = category.categoryId();
+    }
+
 }
 
 void LandmarkManager::saveLandmark(double latitude, double longitude, QString name)
@@ -35,18 +46,20 @@ void LandmarkManager::saveLandmark(double latitude, double longitude, QString na
     coordinate.setLatitude(latitude);
     coordinate.setLongitude(longitude);
     QLandmark landmark;
+    landmark.addCategoryId(m_categoryId);
     landmark.setName(name);
     landmark.setCoordinate(coordinate);
+    landmark.setRadius(100);
 
-    m_manager->saveLandmark(&landmark);
+    bool result = m_manager->saveLandmark(&landmark);
 }
 
 void LandmarkManager::landmarks()
 {
     if (!m_manager)
         return;
-
-    m_manager->landmarks();
+    QList<QLandmarkId> landmarkIds = m_manager->landmarkIds();
+    QList<QLandmark> landmarks = m_manager->landmarks(landmarkIds);
 }
 
 bool LandmarkManager::cleanLandmarks()
@@ -61,4 +74,12 @@ bool LandmarkManager::cleanLandmarks()
         result = m_manager->removeLandmarks(lms);
 
     return result;
+}
+
+void LandmarkManager::onLandmarksAdded(const QList<QLandmarkId> &landmarkIds)
+{
+    foreach(QLandmarkId id, landmarkIds)
+        qDebug() << " ID: " << id.localId();
+
+    landmarks();
 }
