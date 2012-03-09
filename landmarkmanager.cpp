@@ -45,13 +45,13 @@ void LandmarkManager::saveLandmark(double latitude, double longitude, QString na
     QGeoCoordinate coordinate;
     coordinate.setLatitude(latitude);
     coordinate.setLongitude(longitude);
-    QLandmark landmark;
-    landmark.addCategoryId(m_categoryId);
-    landmark.setName(name);
-    landmark.setCoordinate(coordinate);
-    landmark.setRadius(100);
+    QLandmark *landmark = new QLandmark;
+    landmark->addCategoryId(m_categoryId);
+    landmark->setName(name);
+    landmark->setCoordinate(coordinate);
+    landmark->setRadius(100);
 
-    bool result = m_manager->saveLandmark(&landmark);
+    bool result = m_manager->saveLandmark(landmark);
 }
 
 void LandmarkManager::landmarks()
