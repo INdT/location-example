@@ -23,3 +23,6 @@ contains(MEEGO_EDITION, harmattan) {
 
     INSTALLS += target landmarks
 }
+
+OTHER_FILES += \
+    qml/*
