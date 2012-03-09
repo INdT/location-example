@@ -64,7 +64,7 @@ Item {
                     }
                     MapImage {
                         id: image
-                        source: "qrc:/landmarkstar.png"
+                        source: "qrc:/data/images/landmarkstar.png"
                         coordinate: landmark.coordinate
                         z: 2
                     }

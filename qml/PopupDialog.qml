@@ -1,5 +1,4 @@
 import QtQuick 1.0
-//import Qt.labs.components.native 1.0
 import com.nokia.meego 1.1
 
 Item {
@@ -52,9 +51,9 @@ Item {
         MyButton {
             id: okButton
             state: "enabled"
-            defaultImage: "qrc:/bt_ok_on.png"
-            pressedImage: "qrc:/bt_ok_off.png"
-            disabledImage: "qrc:/bt_ok_disabled.png"
+            defaultImage: "qrc:data/images/bt_ok_on.png"
+            pressedImage: "qrc:data/images/bt_ok_off.png"
+            disabledImage: "qrc:data/images/bt_ok_disabled.png"
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
 
