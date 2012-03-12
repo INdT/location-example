@@ -10,8 +10,7 @@ Window {
         id: mainMap
 
         Component.onCompleted: {
-            controller.init()
-            controller.landmarks()
+            controller.fetchLandmarks()
             currentLocationCircle = positionSource.position.coordinate
         }
     }

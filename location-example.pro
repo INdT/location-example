@@ -7,8 +7,10 @@ CONFIG += mobility
 MOBILITY += location
 
 
-HEADERS += landmarkmanager.h
+HEADERS += landmarkmanager.h \
+           controller.h
 SOURCES += landmarkmanager.cpp \
+           controller.cpp \
            main.cpp
 
 RESOURCES += qml.qrc
