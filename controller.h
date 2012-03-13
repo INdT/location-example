@@ -22,6 +22,7 @@ public slots:
 
 private slots:
     void onStateChanged(QLandmarkAbstractRequest::State state);
+    void onResultsAvailable();
 
 private:
     QLandmarkManager *m_manager;

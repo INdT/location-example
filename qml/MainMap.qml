@@ -20,7 +20,7 @@ Item {
     LandmarkModel {
         id: allLandmarksModel
         autoUpdate: true
-        importFile: "/opt/location-example/mylandmarks.lmx"
+        //importFile: "/opt/location-example/mylandmarks.lmx"
         sortBy: LandmarkModel.NameSort
         sortOrder: LandmarkModel.AscendingOrder
         limit: 100
@@ -28,7 +28,7 @@ Item {
 
     PositionSource {
         id: positionSource
-        updateInterval: 30000
+        updateInterval: 60000
         active: true
         onPositionChanged: {
             console.log("### current position: "+position.coordinate.latitude + " -- "+position.coordinate.longitude)

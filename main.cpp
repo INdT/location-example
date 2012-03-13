@@ -4,13 +4,15 @@
 #include <QDeclarativeEngine>
 #include <QUrl>
 
-#include "landmarkmanager.h"
 #include "controller.h"
 
 int main (int argc, char *argv[])
 {
+    QCoreApplication::setOrganizationName("INdT");
+    QCoreApplication::setOrganizationDomain("indt.org.br");
+    QCoreApplication::setApplicationName("location-example");
+
     QApplication app(argc, argv);
-    //LandmarkManager *manager = new LandmarkManager;;
     Controller *controller = new Controller;
 
     QDeclarativeView view;
