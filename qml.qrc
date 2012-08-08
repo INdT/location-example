@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/MainMap.qml</file>
+        <file>qml/MyButton.qml</file>
+        <file>qml/MyToolbar.qml</file>
+        <file>qml/PopupDialog.qml</file>
+
+        <file>data/images/btn_add.png</file>
+        <file>data/images/bt_ok_disabled.png</file>
+        <file>data/images/bt_ok_off.png</file>
+        <file>data/images/bt_ok_on.png</file>
+        <file>data/images/landmarkstar.png</file>
+        <file>data/images/btn_plus.png</file>
+        <file>data/images/btn_minus.png</file>
+    </qresource>
+</RCC>

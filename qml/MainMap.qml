@@ -7,7 +7,9 @@ Item {
     width: parent.width
     height: parent.height
 
-    signal clicked(variant mouse)
+    property alias mapObject: map
+    property alias currentLocationCircle: currentPosition.center
+    property alias positionSource: positionSource
 
     Coordinate {
         id: initialCoordinate
@@ -18,9 +20,19 @@ Item {
     LandmarkModel {
         id: allLandmarksModel
         autoUpdate: true
+        importFile: "/opt/location-example/mylandmarks.lmx"
         sortBy: LandmarkModel.NameSort
         sortOrder: LandmarkModel.AscendingOrder
         limit: 100
+    }
+
+    PositionSource {
+        id: positionSource
+        updateInterval: 30000
+        active: true
+        onPositionChanged: {
+            console.log("### current position: "+position.coordinate.latitude + " -- "+position.coordinate.longitude)
+        }
     }
 
     Map {
@@ -29,7 +41,6 @@ Item {
         zoomLevel: 10
         center: initialCoordinate
 
-        anchors.fill: parent
         size.width: parent.width
         size.height: parent.height
 
@@ -49,14 +60,23 @@ Item {
                         color: "#616161"
                         coordinate: landmark.coordinate
                         offset.y: -10
+                        z: 2
                     }
                     MapImage {
                         id: image
-                        source: "landmarkstar.png"
+                        source: "qrc:/data/images/landmarkstar.png"
                         coordinate: landmark.coordinate
+                        z: 2
                     }
                 }
             }
+        }
+
+        MapCircle {
+            id: currentPosition
+            radius: 100
+            color: "red"
+            center: initialCoordinate
         }
 
         MapMouseArea {
@@ -65,9 +85,6 @@ Item {
             property int lastX: -1
             property int lastY: -1
 
-            onClicked: {
-                mapContainer.clicked(mouse)
-            }
             onPressed: {
                 allLandmarksModel.autoUpdate = false
                 lastX = mouse.x
